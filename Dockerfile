@@ -9,7 +9,8 @@ RUN useradd -ms /bin/bash vault
 # Set up certificates, our base tools, and Vault.
 
 RUN apt-get update && \
-    apt-get install -y wget gnupg2 openssl libpcap-dev  && \
+    apt-get -y dist-upgrade && \
+    apt-get install -y wget gnupg2 openssl libpcap-dev unzip && \
     gpg2 --keyserver  pgp.mit.edu --recv-keys 0x348FFC4C && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS && \
@@ -19,7 +20,8 @@ RUN apt-get update && \
     unzip -d /bin vault_${VAULT_VERSION}_linux_amd64.zip && \
     cd /tmp && \
     rm -rf /tmp/build && \
-    apt-get --purge remove  gnupg2 openssl && \
+    apt-get -y --purge remove  gnupg2 openssl && \
+    apt-get -y clean && \
     rm -rf /root/.gnupg
 
 # /vault/logs is made available to use as a location to store audit logs, if
