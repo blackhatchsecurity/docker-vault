@@ -8,7 +8,7 @@ ENV VAULT_VERSION=0.6.5
 RUN useradd -ms /bin/bash vault
 # Set up certificates, our base tools, and Vault.
 RUN apt-get update && \
-    apt-get install gnupg openssl libpcap-dev  && \
+    apt-get install -y gnupg openssl libpcap-dev  && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS.sig && \
