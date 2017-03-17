@@ -5,9 +5,7 @@ ENV VAULT_VERSION=0.6.5
 
 # Create a vault user and group first so the IDs get set the same way,
 # even as the rest of this may change over time.
-RUN addgroup vault && \
-    adduser vault -q --group vault
-
+RUN useradd -ms /bin/bash vault
 # Set up certificates, our base tools, and Vault.
 RUN apt-get update && \
     apt-get install gnupg openssl libpcap-dev  && \
