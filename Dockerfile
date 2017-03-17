@@ -9,8 +9,8 @@ RUN useradd -ms /bin/bash vault
 # Set up certificates, our base tools, and Vault.
 
 RUN apt-get update && \
-    apt-get install -y wget gnupg openssl libpcap-dev  && \
-    gpg --keyserver keyserver.ubuntu.com --recv-keys 91A6E7F85D05C65630BEF18951852D87348FFC4C && \
+    apt-get install -y wget gnupg2 openssl libpcap-dev  && \
+    gpg --recv-keys 0x348FFC4C && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS.sig && \
