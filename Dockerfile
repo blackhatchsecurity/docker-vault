@@ -6,7 +6,7 @@ ENV VAULT_VERSION=0.6.5
 # Create a vault user and group first so the IDs get set the same way,
 # even as the rest of this may change over time.
 RUN addgroup vault && \
-    adduser -S -G vault vault
+    adduser vault vault
 
 # Set up certificates, our base tools, and Vault.
 RUN apt-get update && \
