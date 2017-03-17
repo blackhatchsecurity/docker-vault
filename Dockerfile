@@ -10,16 +10,16 @@ RUN useradd -ms /bin/bash vault
 
 RUN apt-get update && \
     apt-get install -y wget gnupg2 openssl libpcap-dev  && \
-    gpg --recv-keys 0x348FFC4C && \
+    gpg2 --keyserver  pgp.mit.edu --recv-keys 0x348FFC4C && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS && \
     wget https://releases.hashicorp.com/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS.sig && \
-    gpg --batch --verify vault_${VAULT_VERSION}_SHA256SUMS.sig vault_${VAULT_VERSION}_SHA256SUMS && \
+    gpg2 --batch --verify vault_${VAULT_VERSION}_SHA256SUMS.sig vault_${VAULT_VERSION}_SHA256SUMS && \
     grep vault_${VAULT_VERSION}_linux_amd64.zip vault_${VAULT_VERSION}_SHA256SUMS | sha256sum -c && \
     unzip -d /bin vault_${VAULT_VERSION}_linux_amd64.zip && \
     cd /tmp && \
     rm -rf /tmp/build && \
-    apt-get --purge remove  gnupg openssl && \
+    apt-get --purge remove  gnupg2 openssl && \
     rm -rf /root/.gnupg
 
 # /vault/logs is made available to use as a location to store audit logs, if
